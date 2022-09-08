@@ -1,11 +1,11 @@
-import {useContext, useState} from 'react';
+import { useState} from 'react';
 import {
     signInWithGooglePopup,
     createUserDocumentFromAuth,
     signInAuthUserWithEmailAndPassword
   } from '../../utils/firebase/firebase.utils';
 
-import {UserContext} from '../../context/user.context';
+
 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
@@ -22,7 +22,7 @@ const SignInForm = () => {
     const {email, password} = formFields;
 
 
-    const {setCurrentUser} = useContext(UserContext);
+
 
     const logGoogleUser = async () => {
         const {user} = await signInWithGooglePopup(); 
@@ -40,8 +40,8 @@ const SignInForm = () => {
        
 
         try{
-            const {user} = await signInAuthUserWithEmailAndPassword(email, password); 
-            setCurrentUser(user)
+            await signInAuthUserWithEmailAndPassword(email, password); 
+   
             resetFields();
         }catch(error){
             if(error === "auth/wrong-password" || error === "auth/user-not-found"){
