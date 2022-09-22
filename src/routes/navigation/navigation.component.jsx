@@ -9,11 +9,11 @@ import { signOutUser } from '../../utils/firebase/firebase.utils';
 
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
-
-
-
-import './navigation.styles.scss';
 import CrownLogo from '../../assets/crown.svg';
+
+import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from  './navigation.styles.jsx';
+
+
 
 
 
@@ -25,24 +25,24 @@ const Navigation = () => {
 	return (
 		<div>
             <Fragment>
-                <div className='navigation'>
-                    <Link className='logo-container' to='/'>
+                <NavigationContainer>
+                   <LogoContainer to='/'>
                        <img src={CrownLogo} alt ="Crown Logo" />
-                    </Link>
-                    <div className='nav-links-container'>
-                        <Link className='nav-link' to='/shop'>
+                    </LogoContainer>
+                    <NavLinksContainer>
+                        <NavLink to='/shop'>
                             Shop
-                        </Link>
+                        </NavLink>
                         {
                             currentUser ? (
-                                <span className='nav-link' onClick={signOutUser}>Sign Out</span>
+                                <NavLink as='span' onClick={signOutUser}>Sign Out</NavLink>
                                 ) : (
-                                    <Link className='nav-link' to='/auth'>Sign In</Link> 
+                                    <NavLink to='/auth'>Sign In</NavLink> 
                             )}
                         <CartIcon />
-                    </div>
-                      {isCartOpen &&  <CartDropdown />}
-                </div>
+                    </NavLinksContainer>
+                                {isCartOpen &&  <CartDropdown />}
+                </NavigationContainer>
                 <Outlet />
             </Fragment>
 		</div>
